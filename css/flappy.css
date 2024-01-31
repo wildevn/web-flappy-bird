@@ -58,8 +58,8 @@
     position: absolute;
     background-color: rgba(239, 48, 14, 0.51);
     border: solid 4px rgb(22, 86, 156);
-    top: 190px;
-    left: 730px;
+    top: calc(40% - 60px);
+    left: calc(50% -30px);
     height: 310px;
     width: 250px;
 }
@@ -86,8 +86,8 @@
     margin-left: 90px;
 }
 
-.cloud-sky{
-    height: 493px;
-    width: 800px;
-    position: flex;
+.background-img{
+    position: relative;
+    height: 100%;
+    width: 100%;
 }

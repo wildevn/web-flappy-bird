@@ -11,7 +11,7 @@ function random_tubes_calc(top_tube_e, bottom_tube_e) {
 
     top_tube_e.style.height = `${rand}px`
     // max height - rand number - 2 * border-tube height - 120 space between both
-    bottom_tube_e.style.height = `${700 - rand - 160}px` 
+    bottom_tube_e.style.height = `${700 - rand - 215}px` 
 
     return [top_tube_e, bottom_tube_e]
 }
@@ -63,15 +63,18 @@ function slider() {
 
 function flying_bird() {
     let top = bird.getBoundingClientRect().top
-    if(top > 115)
-        bird.style.top = `${top - 4}px`
-    collider()
+    console.log('up', bird.style.top)
+    if(top > 120)
+    bird.style.top = `${top - 120}px`
+
+//collider()
 }
 
 function falling_bird() {
     let top = bird.getBoundingClientRect().top
-    if(top < 550)
-        bird.style.top = `${top + 4}px`
+    console.log('down', bird.style.top.split('px')[0])
+    if(top < 750)
+        bird.style.top = `${top - 100}px`
 }
 
 function collider() {
@@ -146,9 +149,11 @@ function sky_change() {
 
 generates_tubes()
 const interval_generator = setInterval(generates_tubes, 1800)
-const interval_slider = setInterval(slider, 4)
+const interval_slider = setInterval(slider, 5)
 var interval_falling_bird = setInterval(falling_bird, 20)
 var interval_flying_bird
+var interval_collider = setInterval(collider, 30)
+var interval_background_changer = setInterval(sky_change, 500)
 
 document.body.onmousedown = function () {
     clearInterval(interval_falling_bird)
