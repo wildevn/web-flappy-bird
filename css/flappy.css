@@ -6,59 +6,53 @@
 
 @font-face {
     font-family: 'Pixel';
-    src: url('fonts/Pixel.ttf');
+    src: url('../fonts/Pixel.ttf');
 }
 
 [wm-flappy]{
-    margin-top: 20px;
-    height: 500px;
-    width: 800px;
-    position: flex;
-    border: solid 3px rgb(29, 85, 159);
+    position: relative;
+    margin: 15px;
+    height: 700px;
+    width: 1200px;
+    border: 3px solid rgb(29, 85, 159);
     background-color: rgb(90, 189, 255);
-}
-.hid1, .hid2{
-    position: absolute;
-    height: 500px;
-    width: 120px;
-    background-color: #0D262D;
-    top: 110px;
-}
-.hid2 {
-    left: 1237px;
-    border-left: solid 3px rgb(29, 85, 159);
-}
-.hid1 {
-    left: 323px;
-    border-right: solid 3px rgb(29, 85, 159);
+    overflow: hidden;
 }
 
-.passaro {
+.bird {
     position: absolute;
     height: 50px;
     width: 70px;
     left: calc(50% - 30px);
-    top: calc(50% - 120px);
+    bottom: 50%;
 }
 
-.tubo-area {
+.tube-area {
     position: absolute;
-    width: 80px;
-    height: 496px;
-    top: 113px;
-    left: calc(100% - 440px);
-    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    top: 0;
+    left: 100%;
 }
-.tubo-top, .tubo-bottom, .base-tube{
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.top-tube, .bottom-tube{
     background-color: rgb(5, 178, 5);
+    border-left: solid 3px black;
+    border-right: solid 3px black;
+    width: 80px;
+}
+.base-tube {
+    background-color: rgb(5, 178, 5);
+    height: 20px;
+    width: 100px;
     border: solid 3px black;
-}
-.tubo-top {
-    height: 300px;
-}
-.tubo-bottom {
-    margin-top: 120px;
-    height: calc(496px - 322px - 120px);
 }
 .game-over{
     position: absolute;
@@ -77,10 +71,12 @@
 
 .score {
     position: absolute;
-    font-size: 60px;
+    font-size: 70px;
+    font-family: Pixel;
     color: white;
-    top: 115px;
-    left: 1170px;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
 }
 
 .restart-button{
@@ -94,11 +90,4 @@
     height: 493px;
     width: 800px;
     position: flex;
-}
-
-.base-tube {
-    height: 30px;
-    width: 100px;
-    margin-left: -10px;
-    margin-top: -30px;
 }

@@ -1,59 +1,63 @@
 const available_tubes = []
 const tubes_passed_ids = []
-const bird = document.querySelector('.passaro')
+const bird = document.querySelector('.bird')
 const score_e = document.querySelector('.score')
 var score = 0
 var ids = 0
 
 
 function random_tubes_calc(top_tube_e, bottom_tube_e) {
-    let rand = Math.floor(Math.random() * (300 - 70)) + 70
+    let rand = Math.floor(Math.random() * (400 - 100)) + 100
 
     top_tube_e.style.height = `${rand}px`
-    bottom_tube_e.style.height = `${496 - rand - 122}px`
+    // max height - rand number - 2 * border-tube height - 120 space between both
+    bottom_tube_e.style.height = `${700 - rand - 160}px` 
 
     return [top_tube_e, bottom_tube_e]
 }
 
 function generates_tubes() {
-    const new_div_tube = document.createElement('div')
-    let new_div_tube_top = document.createElement('div')
-    let new_div_tube_bottom = document.createElement('div')
-    //let new_div_base_tube1 = document.createElement('div')
-    //let new_div_base_tube2 = document.createElement('div')
-    
-    //new_div_base_tube1.classList.add('base-tube')
-    //new_div_base_tube2.classList.add('base-tube')
-    //new_div_base_tube2.style.marginTop = '120px'
-    //new_div_base_tube2.style.marginBottom = '-30px'
+    let new_div_tube_area = document.createElement('div')
+    let new_div_top_column = document.createElement('div')
+    let new_div_bottom_column = document.createElement('div')
+    let new_div_top_tube = document.createElement('div')
+    let new_div_bottom_tube = document.createElement('div')
+    let new_div_base_top_tube = document.createElement('div')
+    let new_div_base_bottom_tube = document.createElement('div')
     
 
-    new_div_tube.setAttribute('id', `${ids}`)
+    new_div_tube_area.setAttribute('id', `${ids}`)
     ids++
-
-    new_div_tube.classList.add('tubo-area')
-    new_div_tube_top.classList.add('tubo-top')
-    new_div_tube_bottom.classList.add('tubo-bottom')
     
-    //new_div_tube.appendChild(new_div_base_tube1)
     
-    //new_div_tube.appendChild(new_div_base_tube2)
-    new_div_tube.appendChild(new_div_tube_top)
-    new_div_tube.appendChild(new_div_tube_bottom)
-
+    new_div_tube_area.classList.add('tube-area')
+    new_div_tube_area.style.left = '99%';
+    new_div_top_column.classList.add('column')
+    new_div_bottom_column.classList.add('column')
+    new_div_top_tube.classList.add('top-tube')
+    new_div_bottom_tube.classList.add('bottom-tube')
+    new_div_base_top_tube.classList.add('base-tube')
+    new_div_base_bottom_tube.classList.add('base-tube')
     
-    [new_div_tube_top, new_div_tube_bottom] = random_tubes_calc(new_div_tube_top, new_div_tube_bottom)
-
-    available_tubes.push(new_div_tube)
-    document.querySelector('[wm-flappy]').appendChild(new_div_tube)
+    new_div_top_column.appendChild(new_div_top_tube)
+    new_div_top_column.appendChild(new_div_base_top_tube)
+    new_div_bottom_column.appendChild(new_div_base_bottom_tube)
+    new_div_bottom_column.appendChild(new_div_bottom_tube)
+    
+    new_div_tube_area.appendChild(new_div_top_column)
+    new_div_tube_area.appendChild(new_div_bottom_column)
+    
+    
+    [new_div_top_tube, new_div_bottom_tube] = random_tubes_calc(new_div_top_tube, new_div_bottom_tube)
+    
+   available_tubes.push(new_div_tube_area)
+   document.querySelector('[wm-flappy]').appendChild(new_div_tube_area)
 }
 
 function slider() {
-    for (let tube of available_tubes) {
-        let left_pos = tube.getBoundingClientRect().left
-        tube.style.left = `${left_pos - 1}px`
-    }
-    if(available_tubes[0].getBoundingClientRect().left < 360)
+    for (let tube of available_tubes)
+        tube.style.left = `${parseFloat(tube.style.left) - 0.1}%`
+    if(parseFloat(available_tubes[0].getBoundingClientRect().left) < -150)
         available_tubes.shift()
 }
 
@@ -87,7 +91,6 @@ function collider() {
             else {
                 score_updater(tube.id)
             }
-         
         }
     }
 }
@@ -143,11 +146,9 @@ function sky_change() {
 
 generates_tubes()
 const interval_generator = setInterval(generates_tubes, 1800)
-const interval_slider = setInterval(slider, 5)
+const interval_slider = setInterval(slider, 4)
 var interval_falling_bird = setInterval(falling_bird, 20)
 var interval_flying_bird
-var interval_collider = setInterval(collider, 30)
-var interval_background_changer = setInterval(sky_change, 500)
 
 document.body.onmousedown = function () {
     clearInterval(interval_falling_bird)
