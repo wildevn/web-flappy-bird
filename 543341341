@@ -1,0 +1,44 @@
+[33mcommit 73df229f8298dd5bbb8d5fa528108d9b4abb397b[m[33m ([m[1;36mHEAD -> [m[1;32mver2[m[33m, [m[1;31morigin/ver2[m[33m)[m
+Author: Wilson Eduardo Fantucci Diniz de Almeida <wiledu@hotmail.com>
+Date:   Fri Feb 9 10:21:58 2024 -0400
+
+    now the game is able to be played on mobile
+
+[33mcommit 7c0c71291861a876dc6d88f7ece273a48d314732[m
+Author: Wilson Eduardo Fantucci Diniz de Almeida <wiledu@hotmail.com>
+Date:   Wed Feb 7 00:30:16 2024 -0400
+
+    fixing a missing font-familly
+
+[33mcommit 63387b8c3f3635af31475f2eae5749c3125faa45[m
+Author: Wilson Eduardo Fantucci Diniz de Almeida <wiledu@hotmail.com>
+Date:   Wed Jan 31 16:49:15 2024 -0400
+
+    background-img src fixed
+
+[33mcommit 3b9a8f025475836cfee62209f4c78b4504b40e76[m
+Author: Wilson Eduardo Fantucci Diniz de Almeida <wiledu@hotmail.com>
+Date:   Wed Jan 31 16:46:14 2024 -0400
+
+    The game is working, but there's still some issues
+    to solve
+
+[33mcommit 5afa029f5ce392a36c7e655c2e73d48fe667ad78[m
+Author: Wilson Eduardo Fantucci Diniz de Almeida <wiledu@hotmail.com>
+Date:   Wed Jan 31 16:03:27 2024 -0400
+
+    Creating and ajustind a new version of the game,
+    that will make possible to be playable on other
+    screens, some layouts were fixed
+
+[33mcommit d39865af7e870cae06888cc7d67c5d8b2b7de74d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Wilson Eduardo Fantucci Diniz de Almeida <wiledu@hotmail.com>
+Date:   Wed Jan 31 00:17:07 2024 -0400
+
+    first
+
+[33mcommit 543eda82fe82e8458793758b3f2bc054051d1bbe[m
+Author: wildevn <45374307+wildevn@users.noreply.github.com>
+Date:   Tue Jan 30 22:39:59 2024 -0400
+
+    Initial commit
