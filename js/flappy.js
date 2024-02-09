@@ -63,7 +63,7 @@ function slider() {
 
 function flying_bird() {
     let top = bird.getBoundingClientRect().top
-    console.log('up', bird.style.top)
+    //console.log('up', bird.style.top)
     if(top > 120)
     bird.style.top = `${top - 120}px`
 
@@ -72,7 +72,7 @@ function flying_bird() {
 
 function falling_bird() {
     let top = bird.getBoundingClientRect().top
-    console.log('down', bird.style.top.split('px')[0])
+    //console.log('down', bird.style.top.split('px')[0])
     if(top < 750)
         bird.style.top = `${top - 100}px`
 }
@@ -99,13 +99,21 @@ function collider() {
 }
 
 function stopper() {
-    clearInterval(interval_falling_bird)
-    clearInterval(interval_flying_bird)
     clearInterval(interval_generator)
     clearInterval(interval_slider)
     clearInterval(interval_collider)
-    document.body.onmousedown = e => e.preventDefault();       
-    document.body.onmouseup = e => e.preventDefault();
+    if(navigator.userAgentData.mobile || navigator.userAgentData.prataform == 'Android' || navigator.userAgentData.prataform == '') {
+        clearInterval(interval_touch_falling_bird)
+        clearInterval(interval_touch_flying_bird)
+        document.body.removeEventListener("touchstart", touchstart)
+        document.body.removeEventListener("touchend", touchend)
+    }
+    else {    
+        document.body.onmousedown = e => e.preventDefault();       
+        document.body.onmouseup = e => e.preventDefault();
+        clearInterval(interval_mouse_falling_bird)
+        clearInterval(interval_mouse_flying_bird)
+    }
     game_over()
 }
 
@@ -140,26 +148,46 @@ function score_updater(tube_id) {
 }
 function sky_change() {
     let img = document.querySelector('.cloud-sky')
-    console.log(score % 5, score % 10)
+    //console.log(score % 5, score % 10)
     if(img.src === "./cloud-sky.jpeg" && score % 5 == 0)
         img.src = "./night-sky.avif"
     else if(img.src === "./night-sky.avif" && score % 10 == 0)
         img.src = "./cloud-sky.jpeg"
 }
+function touchstart() {
+    clearInterval(interval_touch_falling_bird)
+    interval_touch_flying_bird = setInterval(flying_bird, 20)
+}
+function touchend() {
+    clearInterval(interval_touch_flying_bird)
+    interval_touch_falling_bird = setInterval(falling_bird, 20)
+}
 
 generates_tubes()
 const interval_generator = setInterval(generates_tubes, 1800)
 const interval_slider = setInterval(slider, 5)
-var interval_falling_bird = setInterval(falling_bird, 20)
-var interval_flying_bird
+var interval_mouse_flying_bird
+var interval_mouse_falling_bird
+var interval_touch_flying_bird
+var interval_touch_falling_bird
 var interval_collider = setInterval(collider, 30)
-var interval_background_changer = setInterval(sky_change, 500)
+//var interval_background_changer = setInterval(sky_change, 500)
+if(navigator.userAgentData.mobile || navigator.userAgentData.prataform == 'Android' || navigator.userAgentData.prataform == '') {
+    interval_touch_falling_bird = setInterval(falling_bird, 20)
+    document.body.addEventListener("touchstart", touchstart)
+    document.body.addEventListener("touchend", touchend)
+}
+else {
+    interval_mouse_falling_bird = setInterval(falling_bird, 20)
+    document.body.onmousedown = function () {
+        clearInterval(interval_mouse_falling_bird)
+        interval_mouse_flying_bird = setInterval(flying_bird, 20)
+    }
+    document.body.onmouseup = function () {
+        clearInterval(interval_mouse_flying_bird)
+        interval_mouse_falling_bird = setInterval(falling_bird, 20)
+    }
+}
 
-document.body.onmousedown = function () {
-    clearInterval(interval_falling_bird)
-    interval_flying_bird = setInterval(flying_bird, 20)
-}
-document.body.onmouseup = function () {
-    clearInterval(interval_flying_bird)
-    interval_falling_bird = setInterval(falling_bird, 20)
-}
+
+console.log(navigator.userAgentData)
